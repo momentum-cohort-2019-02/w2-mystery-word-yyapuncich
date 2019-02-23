@@ -1,33 +1,43 @@
 import random
 import string
 
-# defining acceptable answers by user for level selection as variable VALID_MODE
-valid_mode = "Easy" or "Normal" or "Hard"
+
 def get_user_level():
     """Asks the user for their level preference until they answer in valid format, then returns that level"""
-    # assigning variable ASK to empty string before question is asked
-    answer = ""
+# defining acceptable answers by user for level selection as variable VALID_MODE
+    valid_mode = ["Easy", "Normal", "Hard"]
+# setting initial LEVEL to false so loop  will run
+    level = False
 # loop that will ask user for level preference until they answer with valid selection
 ##### use in statement instead if difficulty in['easy', medium etc]
-    while answer is not valid_mode:
+    while level != True:
         answer = input("What level would you like to play? Easy, Normal, or Hard? ").capitalize()
-        if answer == "Easy":
-            user_mode_select = "Easy"
-            return user_mode_select
-        elif answer == "Normal":
-            user_mode_select = "Normal"
-            return user_mode_select
-        elif answer == "Hard":
-            user_mode_select = "Hard"
-            return user_mode_select
+        if answer in valid_mode:
+            level == True
+            return answer
         else:
-            user_mode_select = "Invalid"
+            level = False
             print("Invalid selection, please try again") 
+    ###### keeping my previous version of this below, I liked Clinton's version in class Friday more :) ##########
+    # while answer is not valid_mode:
+    #     answer = input("What level would you like to play? Easy, Normal, or Hard? ").capitalize()
+    #     if answer == "Easy":
+    #         user_mode_select = "Easy"
+    #         return user_mode_select
+    #     elif answer == "Normal":
+    #         user_mode_select = "Normal"
+    #         return user_mode_select
+    #     elif answer == "Hard":
+    #         user_mode_select = "Hard"
+    #         return user_mode_select
+    #     else:
+    #         user_mode_select = "Invalid"
+    #         print("Invalid selection, please try again") 
         # now return to first question and ask again for valid entry
 
 # assigns variable GAME_MODE to whatever the user selected
 game_mode = get_user_level()
-# print(game_mode) #checking if the above works and it does...
+print(game_mode) #checking if the above works and it does...
 
 # creates game that selects random word from list and asks user for guesses
 def list_generator(word_file):
@@ -48,7 +58,10 @@ def list_generator(word_file):
 
 selection_list = list_generator("words.txt")
 # print(selection_list) #checking here to see if list selection works and it does
-   
+# def get_user_input():
+
+# def respond_to_user(mystery_word, guess):
+
 def play_game():
     """Play the word guessing game loop"""
     # print instructions for user
@@ -63,4 +76,4 @@ def play_game():
 
     print(f"This was attempt number {attempts}. You have 8 total attempts")
 
-play_game()
+# play_game()
