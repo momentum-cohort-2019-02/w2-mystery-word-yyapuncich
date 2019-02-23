@@ -59,6 +59,8 @@ def list_generator(word_file):
 selection_list = list_generator("words.txt")
 # print(selection_list) #checking here to see if list selection works and it does
 def get_user_input():
+    """Gets a guess from user and makes sure it is only one alpha letter"""
+# don't totally understand how while True works... is it just always true???
     while True:
         user_input = input("Guess a letter in the myster word: ")
         if user_input in list(string.ascii_letters):
@@ -66,10 +68,16 @@ def get_user_input():
             if len(guess) == 1:
                 return guess
         
-        print("Invalid entry, please enter only one letter and try again!")
-            
+        print("Invalid entry, please enter only one letter and try again!")          
 
 def respond_to_user(mystery_word, guess):
+    if guess in list(mystery_word):
+        print("Correct guess!")
+    else:
+        print("Try again!")
+
+            # output = 
+
 
 def play_game():
     """Play the word guessing game loop"""
