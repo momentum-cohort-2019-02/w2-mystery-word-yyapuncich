@@ -13,7 +13,7 @@ def get_user_level():
     while level != True:
         answer = input("What level would you like to play? Easy, Normal, or Hard? ").capitalize()
         if answer in valid_mode:
-            level == True
+            level = True
             return answer
         else:
             level = False
@@ -37,7 +37,7 @@ def get_user_level():
 
 # assigns variable GAME_MODE to whatever the user selected
 game_mode = get_user_level()
-print(game_mode) #checking if the above works and it does...
+# print(game_mode) #checking if the above works and it does...
 
 # creates game that selects random word from list and asks user for guesses
 def list_generator(word_file):
@@ -58,17 +58,27 @@ def list_generator(word_file):
 
 selection_list = list_generator("words.txt")
 # print(selection_list) #checking here to see if list selection works and it does
-# def get_user_input():
+def get_user_input():
+    while True:
+        user_input = input("Guess a letter in the myster word: ")
+        if user_input in list(string.ascii_letters):
+            guess = str(user_input)
+            if len(guess) == 1:
+                return guess
+        
+        print("Invalid entry, please enter only one letter and try again!")
+            
 
-# def respond_to_user(mystery_word, guess):
+def respond_to_user(mystery_word, guess):
 
 def play_game():
     """Play the word guessing game loop"""
     # print instructions for user
     print("You have a word that is 4-6 characters in length. You have 8 attempts to guess letters in the word.")
     # set variable to get guesses from user, store that letter.
-    guess = input("Enter a letter:")
     mystery_word = random.choice(selection_list)
+    guess = None
+    attempts = 0
     while guess != mystery_word:
         guess = get_user_input()
         respond_to_user(mystery_word, guess)
@@ -76,4 +86,4 @@ def play_game():
 
     print(f"This was attempt number {attempts}. You have 8 total attempts")
 
-# play_game()
+play_game()
