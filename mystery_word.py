@@ -3,21 +3,21 @@ import string
 
 # defining acceptable answers by user for level selection as variable VALID_MODE
 valid_mode = "Easy" or "Normal" or "Hard"
-
 def get_user_level():
     """Asks the user for their level preference until they answer in valid format, then returns that level"""
     # assigning variable ASK to empty string before question is asked
-    ask = ""
+    answer = ""
 # loop that will ask user for level preference until they answer with valid selection
-    while ask is not valid_mode:
-        ask = input("What level would you like to play? Easy, Normal, or Hard? ").capitalize()
-        if ask == "Easy":
+##### use in statement instead if difficulty in['easy', medium etc]
+    while answer is not valid_mode:
+        answer = input("What level would you like to play? Easy, Normal, or Hard? ").capitalize()
+        if answer == "Easy":
             user_mode_select = "Easy"
             return user_mode_select
-        elif ask == "Normal":
+        elif answer == "Normal":
             user_mode_select = "Normal"
             return user_mode_select
-        elif ask == "Hard":
+        elif answer == "Hard":
             user_mode_select = "Hard"
             return user_mode_select
         else:
@@ -26,32 +26,41 @@ def get_user_level():
         # now return to first question and ask again for valid entry
 
 # assigns variable GAME_MODE to whatever the user selected
-# game_mode = get_user_level()
+game_mode = get_user_level()
 # print(game_mode) #checking if the above works and it does...
 
 # creates game that selects random word from list and asks user for guesses
-def mystery_game_easy(word_file):
+def list_generator(word_file):
     """Comp selects word 4-6 characters long and user guesses letter until word is complete or they run out of guesses"""
     with open(word_file) as file:
         words = file.read()
-        file.close
     # create list of words from txt file of words
-    list_words = []
-    for word in words.split():
-        if len(word) >= 4 and len(word) <= 6:
-            list_words.append(word)
-            
-    return list_words
-    
-easy_words = mystery_game_easy("words.txt")
-    
+    # set it up to do normal and hard mode here too, if else statements
+    if game_mode == "Easy":
+        list_words = [word for word in words.split() if (len(word) >= 4 and len(word) <= 6)]
+        return list_words
+    if game_mode == "Normal":
+        list_words = [word for word in words.split() if (len(word) >= 7 and len(word) <= 8)]
+        return list_words
+    if game_mode == "Hard":
+        list_words = [word for word in words.split() if (len(word) > 8)]
+        return list_words
 
-
+selection_list = list_generator("words.txt")
+# print(selection_list) #checking here to see if list selection works and it does
+   
+def play_game():
+    """Play the word guessing game loop"""
     # print instructions for user
-    # print("You have a word that is 4-6 characters in length. You have 8 attempts to guess letters in the word.")
+    print("You have a word that is 4-6 characters in length. You have 8 attempts to guess letters in the word.")
     # set variable to get guesses from user, store that letter.
-    # get_guesses = input("Enter a letter:")
-    # while 
-# def normal_mode():
+    guess = input("Enter a letter:")
+    mystery_word = random.choice(selection_list)
+    while guess != mystery_word:
+        guess = get_user_input()
+        respond_to_user(mystery_word, guess)
+        attempts += 1
 
-# def hard_mode():
+    print(f"This was attempt number {attempts}. You have 8 total attempts")
+
+play_game()
