@@ -60,19 +60,19 @@ selection_list = list_generator("words.txt")
 # print(selection_list) #checking here to see if list selection works and it does
 def get_user_input():
     """Gets a guess from user and makes sure it is only one alpha letter"""
-# don't totally understand how while True works... is it just always true???
+# don't totally understand how while True works... is it just always true??
     while True:
-        user_input = input("Guess a letter in the myster word: ")
+        user_input = input("Guess a letter in the mystery word: ")
         if user_input in list(string.ascii_letters):
             guess = str(user_input)
-            if len(guess) == 1:
+            if len(guess) == 1:     
                 return guess
         
         print("Invalid entry, please enter only one letter and try again!")          
 
-def respond_to_user(mystery_word, guess):
-    if guess in list(mystery_word):
-        print("Correct guess!")
+def respond_to_user(mystery_word, guess):  
+    if guess in list(mystery_word):        
+        print("Correct")
     else:
         print("Try again!")
 
@@ -84,14 +84,32 @@ def play_game():
     # print instructions for user
     print("You have a word that is 4-6 characters in length. You have 8 attempts to guess letters in the word.")
     # set variable to get guesses from user, store that letter.
-    mystery_word = random.choice(selection_list)
+    mystery_word = list(random.choice(selection_list))
     guess = None
     attempts = 0
-    while guess != mystery_word:
+    all_guesses = []
+    
+    # print(display_list) # testing if it works!
+    while guess != mystery_word and attempts < 8:
+        # print(mystery_word) # testing if it works!
         guess = get_user_input()
         respond_to_user(mystery_word, guess)
         attempts += 1
+         ######### it took me forever to get the following syntax right. could not figure out how to add my guesses to a list!!! ahaha!!!!!
+        all_guesses += str(guess)
+        print_word(mystery_word, all_guesses)
+        # print(all_guesses) # testing if list of guesses works and. it. does.
+        print(f"""This was attempt number {attempts}. You have 8 total attempts. Would you like to play again?""")
 
-    print(f"This was attempt number {attempts}. You have 8 total attempts")
+def display_word(word, guesses):
+    display = [letter if letter in guesses else "_" for letter in word]
+    return display
 
-play_game()
+def print_word(word, guesses):
+    output_letters = [display_word(letter, guesses) for letter in word]
+    print(output_letters)
+            
+    #get user input Y/N and let them play again or thank them for playing
+
+play_game()   
+    
