@@ -91,23 +91,25 @@ def play_game():
     
     # print(display_list) # testing if it works!
     while guess != mystery_word and attempts < 8:
-        # print(mystery_word) # testing if it works!
+        print(mystery_word, "mystery word") # testing if it works!
         guess = get_user_input()
         respond_to_user(mystery_word, guess)
         attempts += 1
          ######### it took me forever to get the following syntax right. could not figure out how to add my guesses to a list!!! ahaha!!!!!
         all_guesses += str(guess)
-        print_word(mystery_word, all_guesses)
-        # print(all_guesses) # testing if list of guesses works and. it. does.
+        display_word(mystery_word, all_guesses)
+        # print(all_guesses, "all guesses") # testing if list of guesses works and. it. does.
         print(f"""This was attempt number {attempts}. You have 8 total attempts. Would you like to play again?""")
 
 def display_word(word, guesses):
+    # display = [letter if letter in guesses else "_" for letter in word]
     display = [letter if letter in guesses else "_" for letter in word]
+    print(' '.join(display), "display")
     return display
 
-def print_word(word, guesses):
-    output_letters = [display_word(letter, guesses) for letter in word]
-    print(output_letters)
+# def print_word(word, guesses):
+#     output_letters = [display_word(letter, guesses) for letter in word]
+#     print(output_letters)
             
     #get user input Y/N and let them play again or thank them for playing
 
