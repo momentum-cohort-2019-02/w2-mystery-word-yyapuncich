@@ -5,12 +5,13 @@ import string
 
 def get_user_level():
     """Asks the user for their level preference until they answer in valid format, then returns that level"""
+    print("""Let's play a game! I'll generate a secret word and you have to guess the letters.\nThere are three levels.\nEasy will have words 4-6 characters in length.\nNormal has words 6-8 characters.\nHard has words that are 8 characters or more.\n""")
 # defining acceptable answers by user for level selection as variable VALID_MODE
     valid_mode = ["Easy", "Normal", "Hard"]
 # setting initial LEVEL to false so loop  will run
     level = False
 # loop that will ask user for level preference until they answer with valid selection
-##### use in statement instead if difficulty in['easy', medium etc]
+##### use in statement instead if difficulty-- in['easy', medium etc]
     while level != True:
         answer = input("What level would you like to play? Easy, Normal, or Hard? ").capitalize()
         if answer in valid_mode:
@@ -39,7 +40,7 @@ def get_user_level():
 def list_generator(word_file):
     """Comp selects word 4-6 characters long and user guesses letter until word is complete or they run out of guesses"""
     with open(word_file) as file:
-        words = file.read().upper()       
+        words = file.read().upper()      
 # create list of words from txt file of words
 # set it up to do normal and hard mode here too, if else statements
     if game_mode == "Easy":
@@ -75,7 +76,7 @@ def respond_to_user(mystery_word, guess):
 def play_game():
     """Play the word guessing game loop"""
 # print instructions for user
-    print("You have a word that is 4-6 characters in length. You have 8 attempts to guess letters in the word.")
+    # print("You have a word that is 4-6 characters in length. You have 8 attempts to guess letters in the word.")
 # mystery_word variable uses random function to select from list, stores in list format
     mystery_word = list(random.choice(selection_list))
 # set variable to get guesses from user, store that letter.
@@ -106,7 +107,7 @@ def play_game():
             print("You have won the game!")
             return option_play_again()
             
-
+# could not get the display word to work unless I did print() inside function
 def display_word(word, guesses):
     """creates display output that shows blank spaces replaced by letters for all the correct guesses"""
     display = [letter if letter in guesses else "_" for letter in word]
