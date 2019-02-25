@@ -62,6 +62,7 @@ def get_user_input():
     """Gets a guess from user and makes sure it is only one alpha letter"""
 # don't totally understand how while True works... is it just always true??
     while True:
+# gooooood LORD did you know .upper takes an argument!? NOW I DO AFTER ALL          DAY
         user_input = input("Guess a letter in the mystery word: ").upper()
         if user_input in list(string.ascii_letters):
             guess = str(user_input)
@@ -88,27 +89,42 @@ def play_game():
     guess = []
     attempts = 0
     all_guesses = []
-    # letters = list(string.ascii_letters)
+    underscores = "_"
+    # check = []
     # convert mystery word to uppercase
     # print(display_list) # testing if it works!
     while mystery_word not in all_guesses and attempts < 8:
         print(mystery_word, "mystery word") # testing if it works!
-        guess = get_user_input()
-        respond_to_user(mystery_word, guess)
-        if guess not in mystery_word:
-            attempts += 1
-         ######### it took me forever to get the following syntax right. could not figure out how to add my guesses to a list!!! ahaha!!!!!
-        all_guesses += str(guess)
-        display_word(mystery_word, all_guesses)
-        # print(all_guesses, "all guesses") # testing if list of guesses works and. it. does.
         print(f"""There are {8 - int(attempts)} turns remaining. 
         Each incorrect guess will deduct from your turns.""")
+        guess = get_user_input()
+        all_guesses += str(guess)
+        display = display_word(mystery_word, all_guesses)
+        respond_to_user(mystery_word, guess)
+         ######### it took me forever to get the following syntax right. could not figure out how to add my guesses to a list!!! ahaha!!!!!
+        # check += str(' '.join(display_word(mystery_word, all_guesses)))
+        # print(check, "check")
+        if guess not in mystery_word:
+            attempts += 1
+        if underscores not in display:
+            print("You have won the game!")
+            return option_play_again()
+            
 
 def display_word(word, guesses):
     # display = [letter if letter in guesses else "_" for letter in word]
     display = [letter if letter in guesses else "_" for letter in word]
     print(' '.join(display), "display")
     return display
+
+def option_play_again():
+    play_again = False
+    while play_again == False:
+        ask = input("Do you want to play again? It's pretttttty fun...(answer Y/N): ").upper()
+        if ask == Y:
+            play_game()
+        else:
+            print("Ok have fun today!")
 
 # def print_word(word, guesses):
 #     output_letters = [display_word(letter, guesses) for letter in word]
